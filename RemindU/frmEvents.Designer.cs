@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.gbOutstanding = new System.Windows.Forms.GroupBox();
-			this.label1 = new System.Windows.Forms.Label();
+			this.lblSodNote = new System.Windows.Forms.Label();
 			this.btnAckOutstanding = new System.Windows.Forms.Button();
 			this.lstOutstanding = new System.Windows.Forms.ListBox();
 			this.btnClose = new System.Windows.Forms.Button();
@@ -44,7 +44,7 @@
 			// 
 			// gbOutstanding
 			// 
-			this.gbOutstanding.Controls.Add(this.label1);
+			this.gbOutstanding.Controls.Add(this.lblSodNote);
 			this.gbOutstanding.Controls.Add(this.btnAckOutstanding);
 			this.gbOutstanding.Controls.Add(this.lstOutstanding);
 			this.gbOutstanding.Location = new System.Drawing.Point(12, 12);
@@ -54,14 +54,14 @@
 			this.gbOutstanding.TabStop = false;
 			this.gbOutstanding.Text = "Reminders outstanding";
 			// 
-			// label1
+			// lblSodNote
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(6, 254);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(223, 13);
-			this.label1.TabIndex = 2;
-			this.label1.Text = "* A reminder time of \'SoD\' means \'Start of Day\'";
+			this.lblSodNote.AutoSize = true;
+			this.lblSodNote.Location = new System.Drawing.Point(6, 254);
+			this.lblSodNote.Name = "lblSodNote";
+			this.lblSodNote.Size = new System.Drawing.Size(223, 13);
+			this.lblSodNote.TabIndex = 2;
+			this.lblSodNote.Text = "* A reminder time of \'SoD\' means \'Start of Day\'";
 			// 
 			// btnAckOutstanding
 			// 
@@ -180,7 +180,7 @@
 		private System.Windows.Forms.Label lblReminderTitle;
 		private System.Windows.Forms.TextBox tbReminderTitle;
 		private System.Windows.Forms.Button btnAckOutstanding;
-		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label lblSodNote;
 
 	}
 }
