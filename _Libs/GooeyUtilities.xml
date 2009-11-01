@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GooeyUtilities</name>
+    </assembly>
+    <members>
+        <member name="F:GooeyControls.GooeyTree.customStateImageList">
+            <summary>
+            The Treeview's .StateImageList controls what checkbox images get displayed.  If it is null, as it is
+            if the .CheckBoxes property is set to false, no checkbox images get displayed.  However, conversely,
+            we DO want .CheckBoxes set to false because this also means that the TreeView doesn't try to manage
+            checkboxes itself; we're still able to manipulate this image list to display our own custom
+            checkboxes.  We'll set .StateImageList to our custom state image list, which will have the images we
+            want for our custom checkbox icons.
+            </summary>
+        </member>
+        <member name="M:GooeyControls.GooeyTree.initNodesState(System.Windows.Forms.TreeNodeCollection)">
+            <summary>
+            Recursively initialize the state image and tag data of all nodes in the collection passed.
+            </summary>
+            <param name="nodes">The tree node collection to init the state of the nodes in.</param>
+        </member>
+        <member name="M:GooeyControls.GooeyTree.initStateImageList(System.Boolean)">
+            <summary>
+            Initialize the state image list of the TreeView.
+            </summary>
+            <param name="enable">Whether to enable checkbox images for this TreeView or not.</param>
+        </member>
+        <member name="M:GooeyControls.GooeyTree.nodeActivated(System.Windows.Forms.TreeNode,GooeyControls.GooeyTree.CheckBoxSpecialOperation,System.Boolean)">
+            <summary>
+            To be called when a checkbox node is activated either by key or by mouse.
+            </summary>
+            <param name="node">The checkbox node that was activated.</param>
+            <param name="op">The special operation (if any) to perform on the node, with regards to checking its child nodes.</param>
+            <param name="activatedByKeyboard">If the checkbox node was activated by keyboard, true; otherwise false.</param>
+        </member>
+        <member name="M:GooeyControls.GooeyTree.updateChildren(System.Windows.Forms.TreeNode,System.Boolean)">
+            <summary>
+            Recursively update the specified node's children according to its value.
+            </summary>
+            <param name="parent">The node whose children to update.</param>
+            <param name="treatPermRecursiveAsChecked">Whether to treat perm recursive and disabled checked nodes as regular checked nodes, as normally they would be immune from recursive unchecking.</param>
+        </member>
+        <member name="M:GooeyControls.GooeyTree.updateParents(System.Windows.Forms.TreeNode)">
+            <summary>
+            Recursively update the specified node's parents according to its value.
+            </summary>
+            <param name="child">The node whose parents to update.</param>
+        </member>
+        <member name="M:GooeyControls.GooeyTree.aChildIsPermRecursive(System.Windows.Forms.TreeNode)">
+            <summary>
+            Recursively checks a node's children to see whether one is perm recursive.
+            </summary>
+            <param name="parent">The node whose children to check.</param>
+            <returns>If a child is perm recursive, true; otherwise false.</returns>
+        </member>
+        <member name="T:Gooey.GooeyBTree`2">
+            <summary>
+            The main point of this structure is that stored values are inherently ordered.  When a value is inserted
+            (the class can be accessed using an indexer), it is automatically ordered in the tree structure using the
+            IComparable implemented by the TKey type.  Ergo, the tree can later be walked from 'smallest' to 'largest'
+            or vice versa, according to the ordering of the nodes.
+            
+            Microsoft's SortedList and SortedDictionary basically implement this, save for the ability to throw an
+            exception if the key already exists, when accessing a node via IDictionary.  Recommend using them instead,
+            as they don't throw a StackOverflowException when you populate them with large numbers of elements.
+            </summary>
+        </member>
+        <member name="M:Gooey.GooeyBTree`2.#ctor(System.Boolean)">
+            <summary>
+            Constructor for Gooey binary tree class.
+            </summary>
+            <param name="exceptionOnNodeKeyClash">Whether to raise an exception when one tries to set a particular key and a node with that key value already exists.  True do do so, false to just update that node to the new value.</param>
+        </member>
+        <member name="M:Gooey.GooeyBTree`2.addNodeTo(Gooey.GooeyBTreeNode{`0,`1},Gooey.GooeyBTreeNode{`0,`1})">
+            <summary>
+            Recursive function that adds a node to the given node if it can, otherwise searches down the tree until it finds a node it can add the node to.
+            </summary>
+            <param name="addTo">The node to start the search at, ie. under which we want to add the new node.</param>
+            <param name="nodeToAdd">The node to add to the tree.</param>
+        </member>
+        <member name="M:Gooey.GooeyBTree`2.getSmallestNode(Gooey.GooeyBTreeNode{`0,`1})">
+            <summary>
+            Recursive function that gets the node with the 'smallest' key value.
+            </summary>
+            <param name="getFrom">The node to start the search at, ie. under which we want to find the smallest value.</param>
+            <returns>The found node with the smallest value.</returns>
+        </member>
+        <member name="M:Gooey.GooeyBTree`2.getLargestNode(Gooey.GooeyBTreeNode{`0,`1})">
+            <summary>
+            Recursive function that gets the node with the 'largest' key value.
+            </summary>
+            <param name="getFrom">The node to start the search at, ie. under which we want to find the largest value.</param>
+            <returns>The found node with the largest value.</returns>
+        </member>
+        <member name="M:Gooey.GooeyBTree`2.getNode(`0,Gooey.GooeyBTreeNode{`0,`1})">
+            <summary>
+            Gets a node in the tree by its key value.
+            </summary>
+            <param name="key">The key of the node we're searching for.</param>
+            <param name="getFrom">The node to start the search at, ie. under which we want to find the node with the given key.</param>
+            <returns>The found node.  null if the node could not be found.</returns>
+        </member>
+        <member name="M:Gooey.GooeyBTree`2.deleteNode(Gooey.GooeyBTreeNode{`0,`1})">
+            <summary>
+            Deletes the specified note from the tree.
+            </summary>
+            <param name="nodeToDelete">The node to delete from the tree.</param>
+        </member>
+        <member name="M:Gooey.GooeyBTree`2.AddNode(`0,`1)">
+            <summary>
+            Adds a node to the tree given a particular key and value for the node to hold.  If a node with an identical key already exists, may throw an exception or overwrite that node, depending on the value of ExceptionOnNodeKeyClash.
+            </summary>
+            <param name="key">The new node's key.</param>
+            <param name="val">The new node's value.</param>
+        </member>
+        <member name="M:Gooey.GooeyBTree`2.DeleteNode(`0)">
+            <summary>
+            Deletes a node from the tree with the given key.
+            </summary>
+            <param name="nodeKey">The key of the node to delete.</param>
+            <returns>True if a node with the given key existed and was deleted; false if no such node existed.</returns>
+        </member>
+        <member name="M:Gooey.GooeyBTree`2.DeleteAllNodes">
+            <summary>
+            Completely clears/terminates the binary tree of all data.
+            </summary>
+        </member>
+        <member name="P:Gooey.GooeyBTree`2.ExceptionOnNodeKeyClash">
+            <summary>
+            Whether to throw an exception when a new node is added and its key conflicts with the key of an existing node.  If true, throws a GooeyNodeAlreadyExistsException; if false, simply updates that node with the new value.
+            </summary>
+        </member>
+        <member name="P:Gooey.GooeyBTreeNode`2.LeftNode">
+            <summary>
+            Used to point to the node whose key is a 'lesser' value than this one.
+            </summary>
+        </member>
+        <member name="P:Gooey.GooeyBTreeNode`2.RightNode">
+            <summary>
+            Used to point to the node whose key is a 'greater' value than this one.
+            </summary>
+        </member>
+        <member name="P:Gooey.GooeyBTreeNode`2.ParentNode">
+            <summary>
+            Used to point to the node that, in the tree, is the parent of this one.
+            </summary>
+        </member>
+        <member name="P:Gooey.GooeyBTreeNode`2.Key">
+            <summary>
+            This node's key.
+            </summary>
+        </member>
+        <member name="P:Gooey.GooeyBTreeNode`2.Value">
+            <summary>
+            This node's value.
+            </summary>
+        </member>
+        <member name="T:Gooey.CloseButtonDisabler">
+            <summary>
+            Because Microsoft bizarrely elected not to allow you to disable the close button from their Form class, we have to implement the ability to do it here by using the Win32 API.
+            </summary>
+        </member>
+        <member name="M:Gooey.CloseButtonDisabler.InitValues(System.Windows.Forms.Form)">
+            <summary>
+            This must be called before any other functionality of the class is used, so it knows which form it's dealing with.
+            </summary>
+            <param name="frmDisableMyButton"></param>
+        </member>
+        <member name="M:Gooey.CloseButtonDisabler.EventSizeChanged">
+            <summary>
+            When a Form is resized, its close button's status will be reset.  You should register a .SizeChanged event handler and make it call this method, in order to maintain the state of the close button whether enabled OR disabled).
+            </summary>
+        </member>
+        <member name="P:Gooey.CloseButtonDisabler.ButtonDisabled">
+            <summary>
+            Set this property to true to disable the close button, or false to enable it.  The property value is a boolean indicating whether the close button is currently disabled or not.
+            </summary>
+        </member>
+        <member name="T:Gooey.VersionStringType">
+            <summary>
+            Used to specify the type of version string that should be generated.
+            </summary>
+        </member>
+        <member name="F:Gooey.VersionStringType.FullString">
+            <summary>
+            A full Assembly version string, including major, minor, build, and revision.
+            </summary>
+        </member>
+        <member name="T:Gooey.Utilities">
+            <summary>
+            Gooey Software's general utility functions class
+            </summary>
+        </member>
+        <member name="M:Gooey.Utilities.GetVersionString(System.Reflection.Assembly,Gooey.VersionStringType)">
+            <summary>
+            Returns a string indicating the version of the Assenbly supplied.
+            </summary>
+            <param name="getVersionFor">The Assembly to get the version string for.</param>
+            <param name="versionStrType">The format of the version string to return.</param>
+            <returns>The version string for the Assembly supplied.</returns>
+        </member>
+        <member name="M:Gooey.Utilities.DriveNameFromCodebase(System.String)">
+            <summary>
+            Captures and returns the 'drive name' part of a codebase string.
+            </summary>
+            <param name="codeBase">The codebase string, eg. file://C:\path\to\codebase.exe</param>
+            <returns>The drive part, eg. 'C', or an empty string if no drive part was found.</returns>
+        </member>
+        <member name="M:Gooey.Utilities.ShowError(System.String)">
+            <summary>
+            Shows an error message dialog with generic error title, OK button, and error message icon.
+            </summary>
+            <param name="errorMsg">The string of the error message to display.</param>
+        </member>
+        <member name="M:Gooey.Utilities.ShowWarning(System.String)">
+            <summary>
+            Shows a warning message dialog with generic error title, OK button, and error message icon.
+            </summary>
+            <param name="warningMsg">The string of the warning message to display.</param>
+        </member>
+        <member name="M:Gooey.Utilities.ShowInfo(System.String)">
+            <summary>
+            Shows an information message dialog with generic information title, OK button, and information icon.
+            </summary>
+            <param name="infoMsg">The string of the information message to display.</param>
+        </member>
+        <member name="M:Gooey.Utilities.ShowOkCancel(System.String,System.String)">
+            <summary>
+            Shows an OK/Cancel dialog with specified title, message, OK/Cancel buttons, and Question icon.
+            </summary>
+            <param name="title">The title/caption for the dialog.</param>
+            <param name="okCancelMsg">The string of the OK/cancel message to display.</param>
+            <returns>The result of the user's interaction with the dialog.</returns>
+        </member>
+        <member name="M:Gooey.Utilities.ShowYesNo(System.String,System.String)">
+            <summary>
+            Shows an Yes/No dialog with specified title, message, Yes/No buttons, and Question icon.
+            </summary>
+            <param name="title">The title/caption for the dialog.</param>
+            <param name="yesNoMsg">The string of the Yes/No message to display.</param>
+            <returns>The result of the user's interaction with the dialog.</returns>
+        </member>
+        <member name="M:Gooey.Utilities.ShowYesNoCancel(System.String,System.String)">
+            <summary>
+            Shows a Yes/No/Cancel dialog with specified title, message, Yes/No/Cancel buttons, and Question icon.
+            </summary>
+            <param name="title">The title/caption for the dialog.</param>
+            <param name="yesNoCancelMsg">The string of the Yes/No/Cancel message to display.</param>
+            <returns>The result of the user's interaction with the dialog.</returns>
+        </member>
+        <member name="M:Gooey.Utilities.ConvertToUnixNewlines(System.String)">
+            <summary>
+            Normalizes all newlines from the input string into Unix-style newlines (\n).
+            </summary>
+            <param name="inputTxt">The text whose newlines to normalize.</param>
+            <returns>The text with normalized newlines.</returns>
+        </member>
+        <member name="M:Gooey.Utilities.ConvertToMacNewlines(System.String)">
+            <summary>
+            Normalizes all newlines from the input string into Mac-style newlines (\r).
+            </summary>
+            <param name="inputTxt">The text whose newlines to normalize.</param>
+            <returns>The text with normalized newlines.</returns>
+        </member>
+        <member name="M:Gooey.Utilities.ConvertToWindowsNewlines(System.String)">
+            <summary>
+            Normalizes all newlines from the input string into Windows-style newlines (\r\n).
+            </summary>
+            <param name="inputTxt">The text whose newlines to normalize.</param>
+            <returns>The text with normalized newlines.</returns>
+        </member>
+        <member name="M:Gooey.Utilities.ScrollTextBoxEnd(System.Windows.Forms.RichTextBox)">
+            <summary>
+            Scrolls the textbox to the end/bottom.  USES THE WIN32 API.
+            </summary>
+            <param name="rtb">The RichTextBox object to scroll to the end/bottom.</param>
+        </member>
+        <member name="T:Gooey.SafeInvoker">
+            <summary>
+            Handles the calling of the Form.Invoke() method in a safe way; that is to say that it will, by default, drop exceptions; it will also return immediately when Invoke is called and setup a new Thread to deal with it.  This may be needed if Invoke is called at a time when the Form may be closing or have closed, so an ObjectDisposedException or InvalidOperationException (which we can safely ignore) may arise.
+            </summary>
+        </member>
+    </members>
+</doc>

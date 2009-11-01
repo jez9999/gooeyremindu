@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemindU", "RemindU\RemindU.csproj", "{DD47443C-40A0-4970-8F16-78DBA61F74DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F8A2070F-8DA2-4122-B0E6-8832DD23EACA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Libs", "_Libs", "{BE4C9745-0A82-4FC8-9653-48B78C1D6038}"
+	ProjectSection(SolutionItems) = preProject
+		_Libs\GooeyUtilities.dll = _Libs\GooeyUtilities.dll
+		_Libs\GooeyUtilities.pdb = _Libs\GooeyUtilities.pdb
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD47443C-40A0-4970-8F16-78DBA61F74DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD47443C-40A0-4970-8F16-78DBA61F74DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD47443C-40A0-4970-8F16-78DBA61F74DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD47443C-40A0-4970-8F16-78DBA61F74DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BE4C9745-0A82-4FC8-9653-48B78C1D6038} = {F8A2070F-8DA2-4122-B0E6-8832DD23EACA}
+	EndGlobalSection
+EndGlobal
