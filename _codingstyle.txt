@@ -40,6 +40,9 @@ coding in this project.  Coding style guide by Jez (will be updated as and when)
 	if (a == b)
 		xyz();
   
+  Example (WRONG):
+	if (a == b) xyz();
+  
   Example (CORRECT):
 	if (a == b) { xyz(); }
   
