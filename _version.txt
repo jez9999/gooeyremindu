@@ -1,0 +1,12 @@
+Remind U VERSION
+================
+
+This version of Remind U is: 1.0.0.0
+
+Places where we need to update the version number when we're changing the version of our
+build:
+- This file, just above.  :-)
+- In the Remind U project Assembly Information; both 'Assembly Version' and 'File
+  Version' should be the same.
+- In the Inno Setup install file (install.iss), 'AppVerName' needs to reflect the
+  version number.

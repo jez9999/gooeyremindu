@@ -1,0 +1,101 @@
+CODING STYLE
+============
+
+Please adhere strictly to the guidelines specified in this coding style document when
+coding in this project.  Coding style guide by Jez (will be updated as and when):
+
+- Code in C#.
+- Local members must begin with a lowercase character, public members must begin with
+  an uppercase character.
+- When opening a block after an initial if() statement, the opening bracket must be on
+  the same line as the if(); begin the else statement on a new line from the closing
+  bracket of the if() block (see examples below).  Likewise with other statements like
+  while(), again the opening bracket must be on the same line as the while().  Yeah,
+  they're not Microsoft's standard, but I prefer them!
+  
+  Example (WRONG):
+	if (a == b)
+	{
+		doSomething();
+	}
+	else
+	{
+		doOtherthing();
+	}
+  
+  Example (CORRECT):
+	if (a == b) {
+		doSomething();
+	}
+	else {
+		doOtherthing();
+	}
+  
+- If there are only 1 or 2 simple statements in a block, the whole block can go on the
+  same line.  You must ALWAYS use brackets for a block, and NEVER use the ability to
+  avoid brackets with a single statement after something like an if() (see examples
+  below).  Frankly, I wish they'd abolished the 'no brackets' thing in C#.
+  
+  Example (WRONG):
+	if (a == b)
+		xyz();
+  
+  Example (CORRECT):
+	if (a == b) { xyz(); }
+  
+  Example (CORRECT):
+	while (a < b) { writeLine(a.toString()); a++; }
+  
+  Example (CORRECT):
+	while (a > b) {
+		if (a-- == 0) { writeLine("b is under zero."); break; }
+	}
+  
+- ALWAYS use tabs for indentation at the beginning of a line.  ALWAYS use spaces for
+  any indentation of comments, enum values, etc. at the end of a line.
+  
+  Example (CORRECT):
+	public enum Breads : int {
+		White     = 0,
+		Brown     = 1,
+		Danish    = 2,
+		Baguette  = 3,
+		Pitta     = 4,
+		Naan      = 5,
+	}
+  
+  Example (CORRECT):
+	if (formIsVisible) {
+		cleanUp();                           // Clean things up
+		displayLine("Closing form 123...");  // Display closing message to user
+		closeForm();                         // Finally, close the form
+	}
+  
+- ALWAYS finish the last member of an enumeration with a comma.
+- Make sure blank lines in between others are indented to the same level as the lines
+  around them, and are not just empty.  You'll have to highlight whitespace to see the
+  difference between the examples.
+  
+  Example (WRONG):
+	statement1;
+
+	if (abc) {
+		a = 1;
+
+		b = 2;
+	}
+  
+  Example (CORRECT):
+	statement1;
+	
+	if (abc) {
+		a = 1;
+		
+		b = 2;
+	}
+  
+- Try to group similar methods together and if there are more than a few of them,
+  surround them in a #region block.  If they are part of a logical function of a class
+  (eg. Constructors), always surround them in a #region block.
+- If there's a comment you want to make to remind someone to come back later and
+  fix/implement/change something, always put a comment there beginning with 'TODO:'.
