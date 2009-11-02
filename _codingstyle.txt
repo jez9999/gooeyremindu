@@ -11,7 +11,7 @@ coding in this project.  Coding style guide by Jez (will be updated as and when)
   the same line as the if(); begin the else statement on a new line from the closing
   bracket of the if() block (see examples below).  Likewise with other statements like
   while(), again the opening bracket must be on the same line as the while().  Yeah,
-  they're not Microsoft's standard, but I prefer them!
+  they're not Microsoft's standards, but I prefer them!
   
   Example (WRONG):
 	if (a == b)
