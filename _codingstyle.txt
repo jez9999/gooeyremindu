@@ -99,3 +99,6 @@ coding in this project.  Coding style guide by Jez (will be updated as and when)
   (eg. Constructors), always surround them in a #region block.
 - If there's a comment you want to make to remind someone to come back later and
   fix/implement/change something, always put a comment there beginning with 'TODO:'.
+- Not quite a coding style guideline, but a guideline all the same: when checking in
+  changes to source control, please give a reasonable (concise, but accurate) summary
+  of the change(s) you have made in that checkin.
