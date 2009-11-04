@@ -47,8 +47,10 @@ namespace RemindU {
 
 		private void calReminderDates_MouseDown(object sender, MouseEventArgs e) {
 			// Trick to avoid the bug occurring when modifying the MonthCalendar BoldedDates into the DateChanged event 
-			if (calReminderDates.HitTest(e.X, e.Y).HitArea == MonthCalendar.HitArea.NextMonthButton
-				|| calReminderDates.HitTest(e.X, e.Y).HitArea == MonthCalendar.HitArea.PrevMonthButton) {
+			if (
+				calReminderDates.HitTest(e.X, e.Y).HitArea == MonthCalendar.HitArea.NextMonthButton ||
+				calReminderDates.HitTest(e.X, e.Y).HitArea == MonthCalendar.HitArea.PrevMonthButton
+			) {
 				RefreshCalendarReminders();
 			}
 		}
