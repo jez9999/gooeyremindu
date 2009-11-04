@@ -90,7 +90,7 @@
 			// lblReminderBody
 			// 
 			this.lblReminderBody.AutoSize = true;
-			this.lblReminderBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ( (byte)( 0 ) ));
+			this.lblReminderBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblReminderBody.Location = new System.Drawing.Point(6, 73);
 			this.lblReminderBody.Name = "lblReminderBody";
 			this.lblReminderBody.Size = new System.Drawing.Size(39, 13);
@@ -100,7 +100,7 @@
 			// lblReminderTitle
 			// 
 			this.lblReminderTitle.AutoSize = true;
-			this.lblReminderTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ( (byte)( 0 ) ));
+			this.lblReminderTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblReminderTitle.Location = new System.Drawing.Point(6, 25);
 			this.lblReminderTitle.Name = "lblReminderTitle";
 			this.lblReminderTitle.Size = new System.Drawing.Size(36, 13);
@@ -171,7 +171,7 @@
 			this.Controls.Add(this.btnTest);
 			this.Controls.Add(this.button1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Icon = ( (System.Drawing.Icon)( resources.GetObject("$this.Icon") ) );
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "frmMain";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Remind U";
