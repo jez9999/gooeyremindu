@@ -109,6 +109,7 @@ namespace RemindU
 						Acknowledged = false
 					}
 				);
+				Program.InstanceFrmMain.refreshCalendarReminders();
 			}
 			catch (EventValueInvalidException ex) {
 				Program.Utils.ShowError(ex.Message);
