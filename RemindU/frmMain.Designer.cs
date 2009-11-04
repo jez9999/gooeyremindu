@@ -159,6 +159,7 @@
 			this.btnEdit.TabIndex = 7;
 			this.btnEdit.Text = "&Edit";
 			this.btnEdit.UseVisualStyleBackColor = true;
+			this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
 			// 
 			// frmMain
 			// 
