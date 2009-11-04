@@ -13,7 +13,8 @@ using Gooey;
 namespace RemindU {
 	public partial class frmMain : Form {
 
-		bool refreshingList;
+		private bool refreshingList;
+		private DateTime lastSelectedDate;
 
 		#region Constructors
 
@@ -55,8 +56,6 @@ namespace RemindU {
 			}
 		}
 
-		private DateTime lastSelectedDate;
-
 		private void calReminderDates_DateChanged(object sender, DateRangeEventArgs e) {
 			if (lastSelectedDate != e.Start) {
 				refreshSelectedDateReminders();
@@ -78,15 +77,14 @@ namespace RemindU {
 		public void RefreshCalendarReminders() {
 			// Fills in the calendar with current events
 			MonthCalendar calendar = calReminderDates;
-			DateTime selectionStart = calendar.SelectionStart;
-			DateTime selectionEnd = calendar.SelectionStart;
+			DateTime selectionStart;
+			DateTime selectionEnd;
 			List<DateTime> boldedDates = new List<DateTime>();
-
+ 			selectionStart = new DateTime(calendar.SelectionStart.Year, calendar.SelectionStart.Month, 1);
+			selectionEnd = selectionStart.AddMonths(1);
+			
 			foreach (Event ev in Program.Events.Values) {
-				selectionStart = new DateTime(calendar.SelectionStart.Year, calendar.SelectionStart.Month, 1);
-				selectionEnd = selectionStart.AddMonths(1);
-
-				if (ev.When >= selectionStart && ev.When < selectionEnd) { boldedDates.Add(ev.When); }
+ 				if (ev.When >= selectionStart && ev.When < selectionEnd) { boldedDates.Add(ev.When); }
 			}
 			calendar.BoldedDates = boldedDates.ToArray();
 			refreshSelectedDateReminders();
@@ -102,7 +100,7 @@ namespace RemindU {
 				if (reminder.When.ToShortDateString() == calReminderDates.SelectionStart.ToShortDateString()) {
 					ReminderListItem listItem = new ReminderListItem();
 					listItem.EventId = evId;
-					listItem.Description = reminder.Title;
+					listItem.Description = RUUtilities.GetReminderSummaryString(Program.Events[evId]);
 					lstReminders.Items.Add(listItem);
 				}
 			}

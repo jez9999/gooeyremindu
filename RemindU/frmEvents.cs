@@ -146,17 +146,9 @@ namespace RemindU
 					}
 					if (!found) {
 						// Add this reminder
-						string reminderDateTime;
-						if (Program.Events[evId].StartOfDay) {
-							reminderDateTime = Program.Events[evId].When.ToLocalTime().ToString("dd MMM yyyy") + "  SoD";
-						}
-						else {
-							reminderDateTime = Program.Events[evId].When.ToLocalTime().ToString("dd MMM yyyy  HH:mm");
-						}
-						
 						ReminderListItem newItem = new ReminderListItem {
 							EventId = evId,
-							Description = "(" + reminderDateTime + ") - " + Program.Events[evId].Title
+							Description = RUUtilities.GetReminderSummaryString(Program.Events[evId])
 						};
 						int placeForItem = findPlaceForListItem(Program.Events[evId]);
 						if (placeForItem < 0) { lstOutstanding.Items.Add(newItem); }
