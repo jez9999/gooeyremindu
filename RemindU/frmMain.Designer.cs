@@ -124,7 +124,7 @@
 			this.gbReminderDateTime.Size = new System.Drawing.Size(449, 186);
 			this.gbReminderDateTime.TabIndex = 5;
 			this.gbReminderDateTime.TabStop = false;
-			this.gbReminderDateTime.Text = "Reminders";
+			this.gbReminderDateTime.Text = "Browsing reminders";
 			// 
 			// calReminderDates
 			// 
