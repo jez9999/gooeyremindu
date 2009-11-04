@@ -100,6 +100,14 @@ coding in this project.  Coding style guide by Jez (will be updated as and when)
 - Try to group similar methods together and if there are more than a few of them,
   surround them in a #region block.  If they are part of a logical function of a class
   (eg. Constructors), always surround them in a #region block.
+- Avoid 'padding' the conditional part of if statements, loops, etc. with spaces.
+  
+  Example (WRONG):
+	while ( i < count ) { displayLine("i: " + i++); }
+  
+  Example (CORRECT):
+	while (i < count) { displayLine("i: " + i++); }
+  
 - If there's a comment you want to make to remind someone to come back later and
   fix/implement/change something, always put a comment there beginning with 'TODO:'.
 - Not quite a coding style guideline, but a guideline all the same: when checking in
