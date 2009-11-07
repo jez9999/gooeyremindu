@@ -12,23 +12,22 @@ using Gooey;
 
 namespace RemindU {
 	public partial class frmMain : Form {
-
 		private bool refreshingList;
 		private DateTime lastSelectedDate;
-
+		
 		#region Constructors
-
+		
 		public frmMain() {
 			InitializeComponent();
 		}
-
+		
 		#endregion
-
+		
 		private void frmMain_Load(object sender, EventArgs ea) {
 			// All of this logic has been moved to Program.
 			RefreshCalendarReminders();
 		}
-
+		
 		private void frmMain_FormClosing(object sender, FormClosingEventArgs ea) {
 			if (!Program.ReallyCloseFrmMain) {
 				// Only hide this form; we don't allow multiple instances of it
@@ -36,16 +35,16 @@ namespace RemindU {
 				ea.Cancel = true;
 			}
 		}
-
+		
 		private void button1_Click(object sender, EventArgs ea) {
 			Program.Utils.ShowInfo("Remind U version: " + Program.Utils.GetVersionString(System.Reflection.Assembly.GetExecutingAssembly(), VersionStringType.FullString));
 		}
-
+		
 		private void btnTest_Click(object sender, EventArgs ea) {
 			//			DateTime dt = new DateTime(2009, 10, 25, 3, 30, 0, DateTimeKind.Local);
 			//			int s=5;
 		}
-
+		
 		private void calReminderDates_MouseDown(object sender, MouseEventArgs e) {
 			// Trick to avoid the bug occurring when modifying the MonthCalendar BoldedDates into the DateChanged event 
 			if (
@@ -55,17 +54,17 @@ namespace RemindU {
 				RefreshCalendarReminders();
 			}
 		}
-
+		
 		private void calReminderDates_DateChanged(object sender, DateRangeEventArgs e) {
 			if (lastSelectedDate != e.Start) {
 				refreshSelectedDateReminders();
 			}
 		}
-
+		
 		private void lstReminders_SelectedIndexChanged(object sender, EventArgs e) {
 			if (!refreshingList) { refreshSelectedReminderInfo(); }
 		}
-
+		
 		private void refreshSelectedReminderInfo() {
 			if (lstReminders.SelectedItem != null) {
 				Event ev = ((Event)Program.Events[((ReminderListItem)lstReminders.SelectedItem).EventId]);
@@ -73,7 +72,7 @@ namespace RemindU {
 				tbReminderBody.Text = Program.Utils.ConvertToWindowsNewlines(ev.Body);
 			}
 		}
-
+		
 		public void RefreshCalendarReminders() {
 			// Fills in the calendar with current events
 			MonthCalendar calendar = calReminderDates;
@@ -89,7 +88,7 @@ namespace RemindU {
 			calendar.BoldedDates = boldedDates.ToArray();
 			refreshSelectedDateReminders();
 		}
-
+		
 		private void refreshSelectedDateReminders() {
 			// Fills the reminders list according to the selected date
 			refreshingList = true;
@@ -104,6 +103,7 @@ namespace RemindU {
 					lstReminders.Items.Add(listItem);
 				}
 			}
+			
 			refreshingList = false;
 			tbReminderBody.Text = "";
 			tbReminderTitle.Text = "";
@@ -114,11 +114,10 @@ namespace RemindU {
 			else {
 				btnEdit.Enabled = false;
 			}
-
 		}
 		
 		private void btnEdit_Click(object sender, EventArgs e) {
-
+			
 		}
 	}
 }

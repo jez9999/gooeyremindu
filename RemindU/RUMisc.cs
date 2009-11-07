@@ -136,7 +136,7 @@ namespace RemindU
 
 		public static string GetReminderSummaryString(Event ev) {
 			string reminderDateTime;
-			if ( ev.StartOfDay ) {
+			if (ev.StartOfDay) {
 				reminderDateTime = ev.When.ToLocalTime().ToString("dd MMM yyyy") + "  SoD";
 			}
 			else {

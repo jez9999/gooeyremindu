@@ -46,17 +46,17 @@
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(467, 12);
+			this.button1.Location = new System.Drawing.Point(468, 209);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
+			this.button1.Size = new System.Drawing.Size(75, 39);
 			this.button1.TabIndex = 0;
-			this.button1.Text = "&About";
+			this.button1.Text = "&About Remind U";
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// btnTest
 			// 
-			this.btnTest.Location = new System.Drawing.Point(467, 41);
+			this.btnTest.Location = new System.Drawing.Point(468, 429);
 			this.btnTest.Name = "btnTest";
 			this.btnTest.Size = new System.Drawing.Size(75, 23);
 			this.btnTest.TabIndex = 1;
@@ -91,7 +91,7 @@
 			// lblReminderBody
 			// 
 			this.lblReminderBody.AutoSize = true;
-			this.lblReminderBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ( (byte)( 0 ) ));
+			this.lblReminderBody.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblReminderBody.Location = new System.Drawing.Point(6, 73);
 			this.lblReminderBody.Name = "lblReminderBody";
 			this.lblReminderBody.Size = new System.Drawing.Size(39, 13);
@@ -101,7 +101,7 @@
 			// lblReminderTitle
 			// 
 			this.lblReminderTitle.AutoSize = true;
-			this.lblReminderTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ( (byte)( 0 ) ));
+			this.lblReminderTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblReminderTitle.Location = new System.Drawing.Point(6, 25);
 			this.lblReminderTitle.Name = "lblReminderTitle";
 			this.lblReminderTitle.Size = new System.Drawing.Size(36, 13);
@@ -123,7 +123,7 @@
 			this.gbReminderDateTime.Controls.Add(this.lstReminders);
 			this.gbReminderDateTime.Location = new System.Drawing.Point(12, 12);
 			this.gbReminderDateTime.Name = "gbReminderDateTime";
-			this.gbReminderDateTime.Size = new System.Drawing.Size(449, 186);
+			this.gbReminderDateTime.Size = new System.Drawing.Size(512, 186);
 			this.gbReminderDateTime.TabIndex = 5;
 			this.gbReminderDateTime.TabStop = false;
 			this.gbReminderDateTime.Text = "Browsing reminders";
@@ -148,14 +148,14 @@
 			this.lstReminders.Location = new System.Drawing.Point(205, 19);
 			this.lstReminders.Name = "lstReminders";
 			this.lstReminders.ScrollAlwaysVisible = true;
-			this.lstReminders.Size = new System.Drawing.Size(238, 155);
+			this.lstReminders.Size = new System.Drawing.Size(297, 155);
 			this.lstReminders.TabIndex = 0;
 			this.lstReminders.SelectedIndexChanged += new System.EventHandler(this.lstReminders_SelectedIndexChanged);
 			// 
 			// btnEdit
 			// 
 			this.btnEdit.Enabled = false;
-			this.btnEdit.Location = new System.Drawing.Point(467, 429);
+			this.btnEdit.Location = new System.Drawing.Point(467, 400);
 			this.btnEdit.Name = "btnEdit";
 			this.btnEdit.Size = new System.Drawing.Size(75, 23);
 			this.btnEdit.TabIndex = 7;
@@ -167,14 +167,16 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(550, 471);
+			this.ClientSize = new System.Drawing.Size(550, 464);
 			this.Controls.Add(this.btnEdit);
 			this.Controls.Add(this.gbReminderDateTime);
 			this.Controls.Add(this.gbReminderInfo);
 			this.Controls.Add(this.btnTest);
 			this.Controls.Add(this.button1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Icon = ( (System.Drawing.Icon)( resources.GetObject("$this.Icon") ) );
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "frmMain";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Remind U";
