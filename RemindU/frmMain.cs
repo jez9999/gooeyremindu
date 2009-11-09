@@ -12,8 +12,8 @@ using Gooey;
 
 namespace RemindU {
 	public partial class frmMain : Form {
-		private bool refreshingList;
-		private DateTime lastSelectedDate;
+		private DateTime prevSelectedDate;
+		private bool evenNo = true;
 		
 		#region Constructors
 		
@@ -24,7 +24,7 @@ namespace RemindU {
 		#endregion
 		
 		private void frmMain_Load(object sender, EventArgs ea) {
-			// All of this logic has been moved to Program.
+			// As soon as we load, we need to get the appropriate reminder dates bolded on the calendar.
 			RefreshCalendarReminders();
 		}
 		
@@ -36,45 +36,37 @@ namespace RemindU {
 			}
 		}
 		
+		private void calReminderDates_DateSelected(object sender, DateRangeEventArgs ea) {
+//			textBox1.Text += "DateSelected... ea.Start: " + ea.Start.ToShortDateString() + "\r\n";
+			
+			if (prevSelectedDate != ea.Start) {
+				//RefreshCalendarReminders();
+				//refreshSelectedDateReminders();
+			}
+			
+			prevSelectedDate = calReminderDates.SelectionStart;
+		}
+		
+		private void calReminderDates_KeyDown(object sender, KeyEventArgs ea) {
+//			textBox1.Text += "KeyDown...\r\n";
+			//Program.Utils.ShowInfo("Date now: " + calReminderDates.SelectionStart.ToShortDateString());
+		}
+		
 		private void button1_Click(object sender, EventArgs ea) {
 			Program.Utils.ShowInfo("Remind U version: " + Program.Utils.GetVersionString(System.Reflection.Assembly.GetExecutingAssembly(), VersionStringType.FullString));
 		}
 		
 		private void btnTest_Click(object sender, EventArgs ea) {
-			//			DateTime dt = new DateTime(2009, 10, 25, 3, 30, 0, DateTimeKind.Local);
-			//			int s=5;
+//			DateTime dt = new DateTime(2009, 10, 25, 3, 30, 0, DateTimeKind.Local);
+//			int s=5;
 		}
 		
-		private void calReminderDates_MouseDown(object sender, MouseEventArgs e) {
-			// Trick to avoid the bug occurring when modifying the MonthCalendar BoldedDates into the DateChanged event 
-			if (
-				calReminderDates.HitTest(e.X, e.Y).HitArea == MonthCalendar.HitArea.NextMonthButton ||
-				calReminderDates.HitTest(e.X, e.Y).HitArea == MonthCalendar.HitArea.PrevMonthButton
-			) {
-				RefreshCalendarReminders();
-			}
-		}
-		
-		private void calReminderDates_DateChanged(object sender, DateRangeEventArgs e) {
-			if (lastSelectedDate != e.Start) {
-				refreshSelectedDateReminders();
-			}
-		}
-		
-		private void lstReminders_SelectedIndexChanged(object sender, EventArgs e) {
-			if (!refreshingList) { refreshSelectedReminderInfo(); }
-		}
-		
-		private void refreshSelectedReminderInfo() {
-			if (lstReminders.SelectedItem != null) {
-				Event ev = ((Event)Program.Events[((ReminderListItem)lstReminders.SelectedItem).EventId]);
-				tbReminderTitle.Text = ev.Title;
-				tbReminderBody.Text = Program.Utils.ConvertToWindowsNewlines(ev.Body);
-			}
+		private void btnEdit_Click(object sender, EventArgs ea) {
+			
 		}
 		
 		public void RefreshCalendarReminders() {
-			// Fills in the calendar with current events
+			// Fills in the calendar 'bolded' list with current events' dates
 			MonthCalendar calendar = calReminderDates;
 			DateTime selectionStart;
 			DateTime selectionEnd;
@@ -86,17 +78,59 @@ namespace RemindU {
  				if (ev.When >= selectionStart && ev.When < selectionEnd) { boldedDates.Add(ev.When); }
 			}
 			calendar.BoldedDates = boldedDates.ToArray();
+			//calendar.BoldedDates = new DateTime[] { new DateTime(2009, 10, 5) };
 			refreshSelectedDateReminders();
+		}
+		
+		private void calReminderDates_MouseDown(object sender, MouseEventArgs ea) {
+//			// Trick to avoid the bug occurring when modifying the MonthCalendar BoldedDates into the DateChanged event 
+//			if (
+//				calReminderDates.HitTest(e.X, e.Y).HitArea == MonthCalendar.HitArea.NextMonthButton ||
+//				calReminderDates.HitTest(e.X, e.Y).HitArea == MonthCalendar.HitArea.PrevMonthButton
+//			) {
+//				RefreshCalendarReminders();
+//			}
+		}
+		
+		private void calReminderDates_DateChanged(object sender, DateRangeEventArgs ea) {
+//			textBox1.Text += "DateChanged... ea.Start: " + ea.Start.ToShortDateString() + "\r\n";
+//			Program.Utils.ShowInfo("DateChanged");
+//			
+//			if (lastSelectedDate != ea.Start) {
+//				RefreshCalendarReminders();
+//				//refreshSelectedDateReminders();
+//			}
+			
+			evenNo = !evenNo;
+			if (!evenNo || true) {
+				//calReminderDates.BoldedDates = new DateTime[] { new DateTime(2009, 10, 5) };
+				RefreshCalendarReminders();
+//				textBox1.Text += "setting bolded dates\r\n";
+			}
+		}
+		
+		private void lstReminders_SelectedIndexChanged(object sender, EventArgs ea) {
+			refreshSelectedReminderInfo();
+		}
+		
+		private void refreshSelectedReminderInfo() {
+			if (lstReminders.SelectedItem != null) {
+				Event ev = ((Event)Program.Events[((ReminderListItem)lstReminders.SelectedItem).EventId]);
+				tbReminderTitle.Text = ev.Title;
+				tbReminderBody.Text = Program.Utils.ConvertToWindowsNewlines(ev.Body);
+			}
 		}
 		
 		private void refreshSelectedDateReminders() {
 			// Fills the reminders list according to the selected date
-			refreshingList = true;
-			lastSelectedDate = calReminderDates.SelectionStart;
 			lstReminders.Items.Clear();
 			foreach (UInt32 evId in Program.Events.Keys) {
 				Event reminder = Program.Events[evId];
-				if (reminder.When.ToShortDateString() == calReminderDates.SelectionStart.ToShortDateString()) {
+				if (
+					reminder.When.Year == calReminderDates.SelectionStart.Year &&
+					reminder.When.Month == calReminderDates.SelectionStart.Month &&
+					reminder.When.Day == calReminderDates.SelectionStart.Day
+				) {
 					ReminderListItem listItem = new ReminderListItem();
 					listItem.EventId = evId;
 					listItem.Description = RUUtilities.GetReminderSummaryString(Program.Events[evId]);
@@ -104,7 +138,6 @@ namespace RemindU {
 				}
 			}
 			
-			refreshingList = false;
 			tbReminderBody.Text = "";
 			tbReminderTitle.Text = "";
 			if (lstReminders.Items.Count > 0) {
@@ -114,10 +147,6 @@ namespace RemindU {
 			else {
 				btnEdit.Enabled = false;
 			}
-		}
-		
-		private void btnEdit_Click(object sender, EventArgs e) {
-			
 		}
 	}
 }

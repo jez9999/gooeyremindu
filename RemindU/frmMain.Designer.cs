@@ -123,7 +123,7 @@
 			this.gbReminderDateTime.Controls.Add(this.lstReminders);
 			this.gbReminderDateTime.Location = new System.Drawing.Point(12, 12);
 			this.gbReminderDateTime.Name = "gbReminderDateTime";
-			this.gbReminderDateTime.Size = new System.Drawing.Size(512, 186);
+			this.gbReminderDateTime.Size = new System.Drawing.Size(530, 186);
 			this.gbReminderDateTime.TabIndex = 5;
 			this.gbReminderDateTime.TabStop = false;
 			this.gbReminderDateTime.Text = "Browsing reminders";
@@ -137,15 +137,17 @@
 			this.calReminderDates.Name = "calReminderDates";
 			this.calReminderDates.ShowToday = false;
 			this.calReminderDates.TabIndex = 0;
+			this.calReminderDates.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calReminderDates_DateSelected);
 			this.calReminderDates.MouseDown += new System.Windows.Forms.MouseEventHandler(this.calReminderDates_MouseDown);
 			this.calReminderDates.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.calReminderDates_DateChanged);
+			this.calReminderDates.KeyDown += new System.Windows.Forms.KeyEventHandler(this.calReminderDates_KeyDown);
 			// 
 			// lstReminders
 			// 
 			this.lstReminders.FormattingEnabled = true;
 			this.lstReminders.HorizontalScrollbar = true;
 			this.lstReminders.IntegralHeight = false;
-			this.lstReminders.Location = new System.Drawing.Point(205, 19);
+			this.lstReminders.Location = new System.Drawing.Point(211, 19);
 			this.lstReminders.Name = "lstReminders";
 			this.lstReminders.ScrollAlwaysVisible = true;
 			this.lstReminders.Size = new System.Drawing.Size(297, 155);
