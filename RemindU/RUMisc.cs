@@ -7,10 +7,10 @@ namespace RemindU
 	// Miscellaneous Remind U functions and structures
 	
 	public class RUUtilities {
-		public static UInt32 GetNextAvailableEventId(SortedDictionary<UInt32, Event> events) {
+		public static UInt32 GetNextAvailableEventId(SortedDictionary<UInt32, Reminder> events) {
 			// Grab the last event's ID, and increment it for next available ID
 			UInt32 newId = 1;
-			foreach (KeyValuePair<UInt32, Event> entry in events) {
+			foreach (KeyValuePair<UInt32, Reminder> entry in events) {
 				newId = entry.Key;
 			}
 			
@@ -96,7 +96,7 @@ namespace RemindU
 //			bool raisedEvents = false;
 			
 			foreach (UInt32 evId in Program.Events.Keys) {
-				Event ev = Program.Events[evId];
+				Reminder ev = Program.Events[evId];
 				if (
 					ev.Acknowledged == false &&
 					!Program.EventsOutstanding.Contains(evId) &&
@@ -134,7 +134,7 @@ namespace RemindU
 			}
 		}
 
-		public static string GetReminderSummaryString(Event ev) {
+		public static string GetReminderSummaryString(Reminder ev) {
 			string reminderDateTime;
 			if (ev.StartOfDay) {
 				reminderDateTime = ev.When.ToLocalTime().ToString("dd MMM yyyy") + "  SoD";
@@ -149,12 +149,12 @@ namespace RemindU
 	/// <summary>
 	/// Represents a reminder event.
 	/// </summary>
-	public class Event {
+	public class Reminder {
 		private string title;
 		private string body;
 		
 		/// <summary>
-		///  *MUST BE UTC!*  The date/time of an event.  If a single event, its date/time.  If a recurring event, the date/time of the first occurance of the event.
+		/// *MUST BE UTC!*  The date/time of an event.  If a single event, its date/time.  If a recurring event, the date/time of the first occurance of the event.
 		/// </summary>
 		public DateTime When { get; set; }
 		/// <summary>
@@ -177,7 +177,7 @@ namespace RemindU
 		/// <summary>
 		/// An event's main body/description.
 		/// </summary>
-		public string Body {	
+		public string Body {
 			get {
 				return this.body;
 			}

@@ -65,7 +65,7 @@ namespace RemindU
 			Program.Utils.ShowInfo("Reminder acknowledged.");
 		}
 		
-		private int findPlaceForListItem(Event ev) {
+		private int findPlaceForListItem(Reminder ev) {
 			// Find which index to insert this item at.  A return value of -1 means just to .Add it to the end.
 			int insertIndex = -1;
 			
@@ -77,7 +77,7 @@ namespace RemindU
 				eventTime = new DateTime(ev.When.Year, ev.When.Month, ev.When.Day, ev.When.Hour, ev.When.Minute, 0);
 			}
 			foreach (ReminderListItem li in lstOutstanding.Items) {
-				Event liEv = Program.Events[li.EventId];
+				Reminder liEv = Program.Events[li.EventId];
 				DateTime liDt = liEv.When;
 				insertIndex++;
 				
@@ -96,7 +96,7 @@ namespace RemindU
 		}
 		
 		private void refreshSelectedReminderInfo() {
-			Event ev = ((Event)Program.Events[((ReminderListItem)lstOutstanding.SelectedItem).EventId]);
+			Reminder ev = ((Reminder)Program.Events[((ReminderListItem)lstOutstanding.SelectedItem).EventId]);
 			tbReminderTitle.Text = ev.Title;
 			tbReminderBody.Text = Program.Utils.ConvertToWindowsNewlines(ev.Body);
 		}

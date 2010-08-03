@@ -74,7 +74,7 @@ namespace RemindU {
  			selectionStart = new DateTime(calendar.SelectionStart.Year, calendar.SelectionStart.Month, 1);
 			selectionEnd = selectionStart.AddMonths(1);
 			
-			foreach (Event ev in Program.Events.Values) {
+			foreach (Reminder ev in Program.Events.Values) {
  				if (ev.When >= selectionStart && ev.When < selectionEnd) { boldedDates.Add(ev.When); }
 			}
 			calendar.BoldedDates = boldedDates.ToArray();
@@ -115,7 +115,7 @@ namespace RemindU {
 		
 		private void refreshSelectedReminderInfo() {
 			if (lstReminders.SelectedItem != null) {
-				Event ev = ((Event)Program.Events[((ReminderListItem)lstReminders.SelectedItem).EventId]);
+				Reminder ev = ((Reminder)Program.Events[((ReminderListItem)lstReminders.SelectedItem).EventId]);
 				tbReminderTitle.Text = ev.Title;
 				tbReminderBody.Text = Program.Utils.ConvertToWindowsNewlines(ev.Body);
 			}
@@ -125,7 +125,7 @@ namespace RemindU {
 			// Fills the reminders list according to the selected date
 			lstReminders.Items.Clear();
 			foreach (UInt32 evId in Program.Events.Keys) {
-				Event reminder = Program.Events[evId];
+				Reminder reminder = Program.Events[evId];
 				if (
 					reminder.When.Year == calReminderDates.SelectionStart.Year &&
 					reminder.When.Month == calReminderDates.SelectionStart.Month &&

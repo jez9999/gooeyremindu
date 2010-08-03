@@ -101,7 +101,7 @@ namespace RemindU
 			try {
 				Program.Events.Add(
 					RUUtilities.GetNextAvailableEventId(Program.Events),
-					new Event {
+					new Reminder {
 						When = localWhen.ToUniversalTime(),
 						Title = tbReminderTitle.Text,
 						Body = tbReminderBody.Text,

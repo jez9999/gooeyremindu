@@ -250,7 +250,7 @@ offsetChangeStr
 							);
 							Program.Events.Add(
 								RUUtilities.GetNextAvailableEventId(Program.Events),
-								new Event {
+								new Reminder {
 									When = dtNowUtc,
 									Title = "Daylight saving time change notification",
 									Body = rmdrBody,

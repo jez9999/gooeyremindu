@@ -13,7 +13,7 @@ namespace RemindU
 		public static frmEvents InstanceFrmEvents = null;
 		public static AppContext InstanceAppContext = null;
 		public static Settings Settings = null;
-		public static SortedDictionary<UInt32, Event> Events = null;
+		public static SortedDictionary<UInt32, Reminder> Events = null;
 		public static List<UInt32> EventsOutstanding = new List<UInt32>();
 		
 		public static RUDStorageManager SM;

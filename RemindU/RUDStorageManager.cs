@@ -46,11 +46,11 @@ namespace RemindU
 		/// Load the sorted dictionary of events stored in our events file, in the current user's app settings dir.
 		/// </summary>
 		/// <returns>The sorted dictionary of Event objects representing the events we loaded from the events file.</returns>
-		public SortedDictionary<UInt32, Event> LoadEvents() {
+		public SortedDictionary<UInt32, Reminder> LoadEvents() {
 			string errorMsg;
 			if (!ensureDirExists(out errorMsg)) { throw new RUDException(errorMsg); }
 			
-			SortedDictionary<UInt32, Event> events = new SortedDictionary<UInt32, Event>();
+			SortedDictionary<UInt32, Reminder> events = new SortedDictionary<UInt32, Reminder>();
 			
 			// Read the events XML file from disk
 			FileStream fsEvents;
@@ -178,7 +178,7 @@ namespace RemindU
 				}
 				
 				try {
-					events.Add(evId, new Event { When = when, Title = title, Body = body, StartOfDay = startOfDay, Acknowledged = acknowledged });
+					events.Add(evId, new Reminder { When = when, Title = title, Body = body, StartOfDay = startOfDay, Acknowledged = acknowledged });
 				}
 				catch (ArgumentException) {
 					throw new RUDException("Couldn't load events from events.xml - a duplicate ID (" + evId + ") exists!");
@@ -195,7 +195,7 @@ namespace RemindU
 		/// Update the sorted dictionary of events stored in our events XML file, in the current user's app settings dir.
 		/// </summary>
 		/// <param name="events">The sorted dictionary of Event objects representing the events to write to the XML file.</param>
-		public void UpdateEvents(SortedDictionary<UInt32, Event> events) {
+		public void UpdateEvents(SortedDictionary<UInt32, Reminder> events) {
 			string errorMsg;
 			if (!ensureDirExists(out errorMsg)) { throw new RUDException(errorMsg); }
 			
@@ -231,7 +231,7 @@ namespace RemindU
 					rootElement = doc.CreateElement("events")
 				);
 				
-				foreach (KeyValuePair<UInt32, Event> entry in events) {
+				foreach (KeyValuePair<UInt32, Reminder> entry in events) {
 					XmlElement eventElement = doc.CreateElement("event");
 					XmlElement whenElement = doc.CreateElement("when");
 					XmlElement titleElement = doc.CreateElement("title");
