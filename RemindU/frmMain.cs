@@ -29,7 +29,7 @@ namespace RemindU {
 		}
 		
 		private void frmMain_FormClosing(object sender, FormClosingEventArgs ea) {
-			if (!Program.ReallyCloseFrmMain) {
+			if (ea.CloseReason != CloseReason.WindowsShutDown && !Program.ReallyCloseFrmMain) {
 				// Only hide this form; we don't allow multiple instances of it
 				this.Hide();
 				ea.Cancel = true;
